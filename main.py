@@ -41,6 +41,9 @@ class GraphicsEngine:
         # self.mesh = Mesh(self)
         # # scene
         self.scene = Cube(self)
+        self.scene1 = Cube1(self, pos =(-2.5,0,0), rot=(45,0,0) )
+        self.scene.m_model = glm.translate(self.scene.m_model, glm.vec3(-3.8, 0.0, 0.0))  # Move the first cube to the left
+        self.scene1.m_model = glm.translate(self.scene1.m_model, glm.vec3(2.0, 0.0, 0.0))  # Move the second cube to the rig
 
     def check_events(self):
         for event in pg.event.get():
@@ -50,10 +53,12 @@ class GraphicsEngine:
                 sys.exit()
 
     def render(self):
+        # while True:
         # clear framebuffer
         self.ctx.clear(color=(0.08, 0.16, 0.18))
         # render scene
         self.scene.render()
+        self.scene1.render()
         # swap buffers
         pg.display.flip()
 
@@ -67,7 +72,7 @@ class GraphicsEngine:
             self.camera.update()
             self.render()
             self.delta_time = self.clock.tick(60)
-            # self.clock.tick(60)
+        
 
 
 if __name__ == '__main__':
